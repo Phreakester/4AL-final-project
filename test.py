@@ -1,35 +1,33 @@
 from openal import *
+
 import time
+import random
+import numpy as np
 
-me = Listener()
-me.set_position((0, 0, 0))
+source = oalOpen('a4.wav')
 
-sound = Source()
-sound.set_pitch(1)
 
-source = oalOpen("test.wav")
+right = (1, 0, 0)
+#front = (0, 0, -1)
+left = (-1, 0, 0)
+#back = (0, 0, 1)
+source.set_rolloff_factor(0)
+r = 3
+pi = np.pi
+#positions = np.linspace(-5, 5, 11)
 
-source.play()
-	
-time.sleep(3)
-source.play()
-source.set_position((1, 10, 0))
-time.sleep(3)
-source.play()
-source.set_position((-1, -10, 0))
-time.sleep(3)
-source.play()
-source.set_position((0, 0, 1))
-time.sleep(3)
-source.play()
-source.set_position((0, 0, -1))
-time.sleep(3)
-source.play()
+positions = [left, right, left, right]
+random.shuffle(positions)
+for degree in positions:
+	#position = (r * np.cos(degree), 0, r * np.sin(degree))
+	#position = (0, 0, degree)
+	source.set_position(degree)
+	source.play()
+	while source.get_state() == AL_PLAYING:
+		# wait until the file is done playing
+		time.sleep(1)
+		source.stop()
 
-# check if the file is still playing
-while source.get_state() == AL_PLAYING:
-	# wait until the file is done playing
-	time.sleep(1)
-	
-# release resources (don't forget this)
+print(positions)
+
 oalQuit()
