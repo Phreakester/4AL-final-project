@@ -9,7 +9,7 @@ class Sound():
     if sound_path:
       self.sound_path = sound_path
     else:
-      self.sound_path = './sounds/cymbal.wav'
+      self.sound_path = 'a4.wav'
 
     self.source = openal.oalOpen(self.sound_path)
 
@@ -19,7 +19,13 @@ class Sound():
     #Play audio from library, using self.position
     #NOTE: Only plays sound, does not collect data
     print("Playing sound... at: ", self.position)
+    position = (-1, 0, 0)
+    if (self.position < 0):
+        position = (1, 0, 0)
+    self.source.set_position(position)
+    print(self.source.position)
     self.source.play() #Play sound
+
   def test(self):
     initial_time = time.time()
     self.playSound()
@@ -35,7 +41,7 @@ if __name__ == "__main__":
     print("Running two sounds, one in front of you (z) and one to the right")
     test1 = Sound()
     test1.test()
-    test2 = Sound(40)
+    test2 = Sound(-90)
     test2.test()
     print(test1.response_time)
     print(test2.response_time)
