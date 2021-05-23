@@ -21,7 +21,7 @@ class Sound():
     #NOTE: Only plays sound, does not collect data
     xpos = -5*np.sin(self.position*np.pi/180)
     zpos = -5*np.cos(self.position*np.pi/180)
-    print("Playing sound... at: ", self.position , " degrees from straight ahead")
+    #print("Playing sound... at: ", self.position , " degrees from straight ahead")
     self.source.set_position((xpos,0,zpos ))
     self.source.play() #Play sound
 
@@ -34,7 +34,6 @@ class Sound():
         keyboard.wait('m')
     final_time = time.time()
     self.response_time = final_time - initial_time
-    openal.oalQuit()
 
 if __name__ == "__main__":
     print("Running two sounds, one in front of you (z) and one to the right")
