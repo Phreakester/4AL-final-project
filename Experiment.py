@@ -104,6 +104,6 @@ if __name__ == "__main__":
     data['Type of Sound'] = randomSounds.results
     data['Music'] = music.results
 
-    with open('results.txt', 'w') as file:
+    with open('results.json', 'w') as file:
         json.dump(data, file)
 
