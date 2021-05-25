@@ -2,6 +2,7 @@ from Sound import Sound
 import random
 import time
 import openal
+import os
 
 class Experiment:
     def __init__(self, size):  # add onto constructor later
@@ -14,7 +15,6 @@ class Experiment:
         for sound_obj in self.sound_list:
             time.sleep(random.random() * 2 + 1)
             sound_obj.test()
-        openal.oalQuit()
 
     def print_results(self):
         if self.results:
@@ -39,10 +39,34 @@ class LeftRightExperiment(Experiment):
         for i in range(self.experiment_size):
             trial = Sound(random.choice([left, right]))
             self.sound_list.append(trial)
+            
+#This is for left right with some angle offset
+class AngledExperiment(Experiment):
+    def construct_experiment(self):
+        left = 90
+        right = -90
+        for i in range(self.experiment_size):
+            direction = random.choice([left, right])
+            offset = random.random() * 45
+            sign = random.choice([-1,1])
+            trial = Sound(direction + sign * offset)
+            self.sound_list.append(trial)
+
+class TypeOfSound(Experiment):
+    def construct_experiment(self):
+        sounds = os.listdir('./sounds')
+        for i in range(self.experiment_size):
+            trial = Sound(0, './sounds/' + random.choice(sounds))
+            self.sound_list.append(trial)
+
+        
+        
 
             
 
 if __name__ == "__main__":
+    '''
+    print("This is a calibration, only press m");
     calibration = CalibrationExperiment(10)
     calibration.construct_experiment()
     calibration.run_experiment()
@@ -58,3 +82,9 @@ if __name__ == "__main__":
     example.print_results()
 
     input("Press s to continue: ")
+    '''
+    randomSounds = TypeOfSound(10)
+    randomSounds.construct_experiment()
+    randomSounds.run_experiment()
+    randomSounds.print_results()
+    openal.oalQuit()

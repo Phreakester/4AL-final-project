@@ -32,11 +32,12 @@ class Sound():
         keyboard.wait('z')
     else:
         keyboard.wait('m')
+    self.source.stop()
     final_time = time.time()
     self.response_time = final_time - initial_time
 
 if __name__ == "__main__":
-    print("Running two sounds, one in front of you (z) and one to the right")
+    print("Running two sounds, one in front of you (z) and one to the right (m)")
     test1 = Sound()
     test1.test()
     test2 = Sound(-90)
