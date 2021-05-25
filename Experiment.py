@@ -37,7 +37,7 @@ class DirectionExperiment(Experiment):
         for i in range(self.experiment_size):
             trial = Sound(random.choice([left, right]))
             self.sound_list.append(trial)
-            
+
 #This is for left right with some angle offset
 class AngledExperiment(Experiment):
     def construct_experiment(self):
