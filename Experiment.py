@@ -39,7 +39,7 @@ class LeftRightExperiment(Experiment):
         for i in range(self.experiment_size):
             trial = Sound(random.choice([left, right]))
             self.sound_list.append(trial)
-            
+
 #This is for left right with some angle offset
 class AngledExperiment(Experiment):
     def construct_experiment(self):
@@ -65,7 +65,7 @@ class TypeOfSound(Experiment):
             
 
 if __name__ == "__main__":
-    '''
+    
     print("This is a calibration, only press m");
     calibration = CalibrationExperiment(10)
     calibration.construct_experiment()
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     example.print_results()
 
     input("Press s to continue: ")
-    '''
+    
     randomSounds = TypeOfSound(10)
     randomSounds.construct_experiment()
     randomSounds.run_experiment()
