@@ -78,7 +78,7 @@ class TypeOfSound(Experiment):
 
 if __name__ == "__main__":
     
-    print("This is a calibration, only press m");
+    '''print("This is a calibration, only press m");
     calibration = CalibrationExperiment(10)
     calibration.construct_experiment()
     calibration.run_experiment()
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     example.run_experiment()
     example.print_results()
 
-    input("Press s to continue: ")
+    input("Press s to continue: ")'''
     
     randomSounds = TypeOfSound(10)
     randomSounds.construct_experiment()
