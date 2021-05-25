@@ -3,6 +3,7 @@ import random
 import time
 import openal
 import os
+import json
 
 class Experiment:
     def __init__(self, size):  # add onto constructor later
@@ -96,3 +97,13 @@ if __name__ == "__main__":
     randomSounds.run_experiment()
     randomSounds.print_results()
     openal.oalQuit()
+
+    data = {}
+    data['Control'] = control.results
+    data['Direction'] = direction.results
+    data['Type of Sound'] = randomSounds.results
+    data['Music'] = music.results
+
+    with open('results.json', 'w') as file:
+        json.dump(data, file)
+
