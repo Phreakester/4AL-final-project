@@ -10,14 +10,13 @@ class Experiment:
         self.experiment_size = size
         self.sound_list = []
         self.results = []
-    #NOTe: Construcor for the actual list provided by children
 
     def run_experiment(self):
         for sound_obj in self.sound_list:
             time.sleep(random.random() * 2 + 1)
             sound_obj.test()
 
-    def print_results(self):
+    def fill_results(self):
         if self.results:
             print("There are already results stored for this experiment, overwrite? (y/n): ")
             if input() != 'y':
@@ -26,14 +25,12 @@ class Experiment:
         for sound_obj in self.sound_list:
             self.results.append(sound_obj.response_time)
 
-        print(self.results)
-
-class CalibrationExperiment(Experiment):
+class ControlExperiment(Experiment):
     def construct_experiment(self):
         for i in range(self.experiment_size):
             self.sound_list.append(Sound(0))
 
-class LeftRightExperiment(Experiment):
+class DirectionExperiment(Experiment):
     def construct_experiment(self):
         left = 90
         right = -90
@@ -67,35 +64,38 @@ class TypeOfSound(Experiment):
             trial = Sound(0, './sounds/' + sound)
             self.sound_list.append(trial)
 
-    def print_results(self):
+    def fill_results(self):
         for sound_obj in self.sound_list:
             self.sound_dictionary[sound_obj.sound_path[9:]].append(sound_obj.response_time)
-        print(self.sound_dictionary)
+        self.results = self.sound_dictionary
+            
 
-        
 if __name__ == "__main__":
-    
-    print("This is a calibration, only press m")
-    calibration = CalibrationExperiment(10)
-    calibration.construct_experiment()
-    calibration.run_experiment()
-    calibration.print_results()
+    input("This is a control. Press m when you hear a sound. Press enter to begin the experiment.")
+    control = ControlExperiment(50)
+    control.construct_experiment()
+    control.run_experiment()
+    control.fill_results()
 
-    char = input("Press q to quit")
-    if (char == 'q'):
-        exit(0)
+    input("\nA sound will play from your left or right. Press z if its from your left and m if its from your right. Press enter to begin next experiment.")
 
-    example = LeftRightExperiment(5)
-    example.construct_experiment()
-    example.run_experiment()
-    example.print_results()
+    direction = DirectionExperiment(100)
+    direction.construct_experiment()
+    direction.run_experiment()
+    direction.fill_results()
 
-    input("Press s to continue: ")
-    
-    randomSounds = TypeOfSound(10)
+    input("\nPress m when you hear a sound. Press enter to begin next experiment.")
+
+    randomSounds = TypeOfSound(100)
     randomSounds.construct_experiment()
     randomSounds.run_experiment()
-    randomSounds.print_results()
+    randomSounds.fill_results()
+
+    input("\nPlay music, press enter when you hear the control sound. Press enter to begin final experiment")
+    music = ControlExperiment(50)
+    music.construct_experiment()
+    music.run_experiment()
+    music.fill_results()
     openal.oalQuit()
 
     data = {}
@@ -107,5 +107,4 @@ if __name__ == "__main__":
     with open('results.json', 'w') as file:
         json.dump(data, file)
 
-    print("Go to the directory this file is in and rename results to yourname_results")
-
+    print("\nGo to the directory this file is in and rename results to yourname_results")
