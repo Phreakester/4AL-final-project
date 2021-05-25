@@ -53,11 +53,23 @@ class AngledExperiment(Experiment):
             self.sound_list.append(trial)
 
 class TypeOfSound(Experiment):
+    def __init__(self, size):
+        Experiment.__init__(self, size)
+        self.sound_dictionary = {}
+        self.sounds = os.listdir('./sounds')
+        for sound in self.sounds:
+            self.sound_dictionary[sound] = []
+
     def construct_experiment(self):
-        sounds = os.listdir('./sounds')
         for i in range(self.experiment_size):
-            trial = Sound(0, './sounds/' + random.choice(sounds))
+            sound = random.choice(self.sounds)
+            trial = Sound(0, './sounds/' + sound)
             self.sound_list.append(trial)
+
+    def print_results(self):
+        for sound_obj in self.sound_list:
+            self.sound_dictionary[sound_obj.sound_path[9:]].append(sound_obj.response_time)
+        print(self.sound_dictionary)
 
         
         
