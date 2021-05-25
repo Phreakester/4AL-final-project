@@ -107,3 +107,5 @@ if __name__ == "__main__":
     with open('results.json', 'w') as file:
         json.dump(data, file)
 
+    print("Go to the directory this file is in and rename results to yourname_results")
+
