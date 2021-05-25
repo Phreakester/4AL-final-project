@@ -10,7 +10,7 @@ class Sound():
     if sound_path:
       self.sound_path = sound_path
     else:
-      self.sound_path = './sounds/cymbalnew.wav'
+      self.sound_path = './sounds/a4.wav'
 
     self.source = openal.oalOpen(self.sound_path)
 
