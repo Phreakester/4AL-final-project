@@ -13,7 +13,7 @@ class Experiment:
 
     def run_experiment(self):
         for sound_obj in self.sound_list:
-            #time.sleep(random.random() * 2 + 1)
+            time.sleep(random.random() * 2 + 1)
             sound_obj.test()
 
     def fill_results(self):
