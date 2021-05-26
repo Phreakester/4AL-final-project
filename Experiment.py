@@ -15,6 +15,7 @@ class Experiment:
         for sound_obj in self.sound_list:
             time.sleep(random.random() * 2 + 1)
             sound_obj.test()
+        openal.oalQuit()
 
     def fill_results(self):
         if self.results:
@@ -96,7 +97,6 @@ if __name__ == "__main__":
     music.construct_experiment()
     music.run_experiment()
     music.fill_results()
-    openal.oalQuit()
 
     data = {}
     data['Control'] = control.results
