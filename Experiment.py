@@ -13,9 +13,8 @@ class Experiment:
 
     def run_experiment(self):
         for sound_obj in self.sound_list:
-            time.sleep(random.random() * 2 + 1)
+            #time.sleep(random.random() * 2 + 1)
             sound_obj.test()
-        openal.oalQuit()
 
     def fill_results(self):
         if self.results:
@@ -72,32 +71,34 @@ class TypeOfSound(Experiment):
             
 
 if __name__ == "__main__":
-    input("This is a control. Press m when you hear a sound. Press enter to begin the experiment.")
+    input("Press m when you hear a sound. Press enter to continue the experiment.")
     control = ControlExperiment(50)
     control.construct_experiment()
     control.run_experiment()
     control.fill_results()
 
-    input("\nA sound will play from your left or right. Press z if its from your left and m if its from your right. Press enter to begin next experiment.")
+    input("\nPress m when you hear a sound. Press enter to continue the experiment.")
+
+    randomSounds = TypeOfSound(100)
+    randomSounds.construct_experiment()
+    randomSounds.run_experiment()
+    randomSounds.fill_results()
+    openal.oalQuit()
+
+    input("\nA sound will play from your left or right. Press z if its from your left and m if its from your right. Press enter to continue the experiment.")
 
     direction = DirectionExperiment(100)
     direction.construct_experiment()
     direction.run_experiment()
     direction.fill_results()
 
-    input("\nPress m when you hear a sound. Press enter to begin next experiment.")
 
-    randomSounds = TypeOfSound(100)
-    randomSounds.construct_experiment()
-    randomSounds.run_experiment()
-    randomSounds.fill_results()
-
-    input("\nPlay music, press enter when you hear the control sound. Press enter to begin final experiment")
+    input("\nPlay music, press m when you hear the control sound. Press enter to begin final experiment")
     music = ControlExperiment(50)
     music.construct_experiment()
     music.run_experiment()
     music.fill_results()
-
+    
     data = {}
     data['Control'] = control.results
     data['Direction'] = direction.results
