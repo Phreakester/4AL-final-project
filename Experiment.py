@@ -78,21 +78,21 @@ if __name__ == "__main__":
     control.run_experiment()
     control.fill_results()
 
-    input("A sound will play from your left or right. Press z if its from your left and m if its from your right. Press enter to begin next experiment.")
+    input("\nA sound will play from your left or right. Press z if its from your left and m if its from your right. Press enter to begin next experiment.")
 
     direction = DirectionExperiment(100)
     direction.construct_experiment()
     direction.run_experiment()
     direction.fill_results()
 
-    input("Press m when you hear a sound. Press enter to begin next experiment.")
+    input("\nPress m when you hear a sound. Press enter to begin next experiment.")
 
     randomSounds = TypeOfSound(100)
     randomSounds.construct_experiment()
     randomSounds.run_experiment()
     randomSounds.fill_results()
 
-    input("Play music, press enter when you hear the control sound. Press enter to begin final experiment")
+    input("\nPlay music, press enter when you hear the control sound. Press enter to begin final experiment")
     music = ControlExperiment(50)
     music.construct_experiment()
     music.run_experiment()
@@ -107,5 +107,4 @@ if __name__ == "__main__":
     with open('results.json', 'w') as file:
         json.dump(data, file)
 
-    print("Go to the directory this file is in and rename results to yourname_results")
-
+    print("\nGo to the directory this file is in and rename results to yourname_results")
